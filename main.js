@@ -10,7 +10,9 @@ function createWindow () {
     }
   });
 
-  win.loadFile('index.html');
+  win.loadFile('./build/index.html');
+
+  win.webContents.openDevTools()
 }
 
 // Electron 애플리케이션이 초기화되면 CreateWindow(윈도우 생성) 기능을 호출하여 새 브라우저 창을 생성합니다.
