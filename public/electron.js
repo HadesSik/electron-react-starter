@@ -1,18 +1,26 @@
 const { app, BrowserWindow } = require('electron');
+const isDev = require('electron-is-dev');
 
 // 노드 통합을 사용하도록 설정된 새 브라우저 창을 생성하는 기능을 정의하고 index.html 파일을 이 창에 로드합니다.
 function createWindow () {
-  const win = new BrowserWindow({
-    width: 800,
-    height: 600,
+  let win = new BrowserWindow({
+    center: true,
     webPreferences: {
+      // Node 환경처럼 사용하기 위해 필요한 옵션 (노드 빌트인 패키지 포함)
       nodeIntegration: true
     }
   });
 
-  win.loadFile('./build/index.html');
+  if (isDev) {
+    win.loadURL('http://localhost:3000');
+    win.webContents.openDevTools()
+  } else {
+    win.loadFile('../build/index.html');
+  }
 
-  win.webContents.openDevTools()
+  win.on('closed', () => {
+    win = undefined;
+  })
 }
 
 // Electron 애플리케이션이 초기화되면 CreateWindow(윈도우 생성) 기능을 호출하여 새 브라우저 창을 생성합니다.

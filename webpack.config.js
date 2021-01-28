@@ -46,6 +46,11 @@ module.exports = {
       filename: './index.html'
     })
   ],
+  devServer: {
+    port: 3000,
+    overlay: true,
+    stats: 'errors-only'
+  },
   output: {
     path: __dirname + '/build'
   },
