@@ -1,15 +1,26 @@
-import React, {Component} from 'react'
+import React from 'react'
 import './App.css'
 
-export default class App extends Component {
-  render () {
-    return (
-      <div className='app'>
+const App = () => {
+  const onClick = () => {
+    const noti = new Notification('Hello', {
+      body: 'Click here.',
+    });
+
+    noti.onclick = () => {
+      console.log('click!');
+    }
+  }
+
+  return (
+    <div className='app'>
       <h1>Electron React App</h1>
-    <p>
-    To get started, edit <code>src/App.js</code> and save to reload.
-    </p>
+      <p>
+        To get started, edit <code>src/App.js</code> and save to reload.
+      </p>
+      <button onClick={onClick}>notification</button>
     </div>
   )
-  }
 }
+
+export default App;

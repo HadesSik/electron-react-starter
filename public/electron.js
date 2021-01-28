@@ -1,4 +1,4 @@
-const { app, BrowserWindow } = require('electron');
+const { app, BrowserWindow, Notification } = require('electron');
 const path = require('path');
 
 // 노드 통합을 사용하도록 설정된 새 브라우저 창을 생성하는 기능을 정의하고 index.html 파일을 이 창에 로드합니다.
@@ -26,8 +26,20 @@ function createWindow () {
   })
 }
 
+// notification
+function showNotification () {
+  const notification = {
+    title: 'basic notification',
+    body: 'running electron.',
+  };
+
+  new Notification(notification).show();
+}
+
 // Electron 애플리케이션이 초기화되면 CreateWindow(윈도우 생성) 기능을 호출하여 새 브라우저 창을 생성합니다.
-app.whenReady().then(createWindow);
+app.whenReady()
+  .then(createWindow)
+  .then(showNotification);
 
 // 열려 있는 창이 더 이상 없을 때 응용 프로그램을 종료하려는 새 수신기를 추가합니다.
 // 이 수신기는 운영 체제의 창 관리 동작으로 인해 macOS에 대한 실행 중지입니다.
