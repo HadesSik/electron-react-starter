@@ -1,0 +1,12 @@
+# Intellij
+.idea
+
+# npm
+package-lock.json
+
+# modules
+node_modules
+
+# build
+dist
+out/
